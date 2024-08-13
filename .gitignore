@@ -1,2 +1,5 @@
 Versiones_TES/
-
+_pycache_/
+*.xlsx
+calculos.py
+Ajuste_orsini/
