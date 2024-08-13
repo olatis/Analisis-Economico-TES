@@ -1,5 +1,6 @@
 Versiones_TES/
-_pycache_/
+__pycache__/
 *.xlsx
 calculos.py
 Ajuste_orsini/
+flujo2.py
