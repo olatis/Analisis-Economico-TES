@@ -167,9 +167,10 @@ class TES:
         - float o str: El OPEX calculado o un mensaje indicando los parámetros faltantes.
         """
         required_params = {
-            'delta_pressure_charge': 'Pa',  # Cambiado aquí
-            'delta_pressure_discharge': 'Pa',  # Cambiado aquí
-            'mass_flow_rate': 'kg/s',
+            'delta_pressure_charge': 'Pa',
+            'delta_pressure_discharge': 'Pa',
+            'mass_flow_rate_charge': 'kg/s',  # Cambiado aquí
+            'mass_flow_rate_discharge': 'kg/s',  # Cambiado aquí
             'working_fluid_density': 'kg/m³',
             'charging_time': 'hours',
             'discharging_time': 'hours',
@@ -183,8 +184,8 @@ class TES:
         if missing_params:
             return f"Faltan los siguientes datos: {missing_params}"
         
-        charge_term = (self.mass_flow_rate * self.delta_pressure_charge / self.working_fluid_density) * self.charging_time  # Cambiado aquí
-        discharge_term = (self.mass_flow_rate * self.delta_pressure_discharge / self.working_fluid_density) * self.discharging_time  # Cambiado aquí
+        charge_term = (self.mass_flow_rate_charge * self.delta_pressure_charge / self.working_fluid_density) * self.charging_time  # Cambiado aquí
+        discharge_term = (self.mass_flow_rate_discharge * self.delta_pressure_discharge / self.working_fluid_density) * self.discharging_time  # Cambiado aquí
         opex = (self.cycles_per_year / self.service_years) * (self.electricity_cost_per_joule / self.fan_efficiency) * (charge_term + discharge_term) + (self.capex_maintenance_percentage * self.capex_knobloch()) / self.service_years
         return opex
 
@@ -199,8 +200,6 @@ class TES:
         required_params = {
             'annual_discount_rate': '',
             'tes_energy_capacity': 'kWh',
-            'service_years': '',
-            'cycles_per_year': '',
             'tes_efficiency': '',
         }
         missing_params = self.check_parameters(required_params)
@@ -213,7 +212,7 @@ class TES:
         if isinstance(opex, str):
             return f"Faltan datos de OPEX: {opex}"
         
-        capex = self.capex_knobloch()
+        capex = self.capex_pereira()
         if isinstance(capex, str):
             return capex
 

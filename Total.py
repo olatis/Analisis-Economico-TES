@@ -1,5 +1,5 @@
-from TES7 import TES
-from Flujo1 import calcular_flujo_de_caja
+from TES_object import TES
+from Flujo_de_caja import calcular_flujo_de_caja
 
 
 
