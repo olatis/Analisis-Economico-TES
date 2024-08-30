@@ -48,7 +48,7 @@ def calcular_flujo_de_caja(años, precio_energia, produccion_anual, subsidios, c
         
         # Inversión de capital en el primer año
         inversiones_capital = inversion_inicial if año == 1 else 0
-        
+        lo
         # Cálculo del flujo de caja libre
         flujo_caja_libre = flujo_caja_operativo - inversiones_capital
         
@@ -68,6 +68,8 @@ def calcular_flujo_de_caja(años, precio_energia, produccion_anual, subsidios, c
     df_flujo_caja = pd.DataFrame(data, columns=columnas)
 
     return df_flujo_caja
+
+
 
 # # Parámetros de entrada
 # años = 5  # Número de años de análisis

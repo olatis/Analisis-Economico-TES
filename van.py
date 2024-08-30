@@ -1,4 +1,5 @@
-from Flujo_de_caja import calcular_flujo_de_caja
+from Flujo_de_caja2 import calcular_flujo_de_caja
+import matplotlib.pyplot as plt
 
 # # Parámetros generales
 # años = 30
@@ -45,17 +46,17 @@ produccion_diaria = 126.26e3 + 155.07e3 # kWh
 
 # Parámetros de entrada
 años = 30  # Número de años de análisis
-precio_energia = 0.11  # Precio de venta de energía por kWh
-produccion_anual = produccion_diaria * 365  # Producción anual de energía en kWh
-subsidios = 0  # Subsidios anuales
-costos_om = 1.09e6  # Costos de operación y mantenimiento anuales
-costos_combustible = 0  # Costos de combustible anuales
-costos_capital = 0  # Pagos de intereses y amortización de préstamos anuales
-costos_seguro = 0  # Costos de seguro anuales
-otros_costos = 3.09e6  # Otros costos anuales
-inversion_inicial = 54.73e6  # Inversión inicial en la planta
-tasa_impuestos = 0  # Tasa de impuestos sobre la renta
-tasa_descuento = 0.07  # Tasa de descuento para el cálculo del VAN
+precio_energia = [0.11]*años  # Precio de venta de energía por kWh
+produccion_anual = [produccion_diaria * 365]*años  # Producción anual de energía en kWh
+subsidios = [0]*años  # Subsidios anuales
+costos_om = [1.09e6] *años # Costos de operación y mantenimiento anuales
+costos_combustible = [0]*años  # Costos de combustible anuales
+costos_capital = [0]*años  # Pagos de intereses y amortización de préstamos anuales
+costos_seguro = [0]*años  # Costos de seguro anuales
+otros_costos = [3.09e6] *años # Otros costos anuales
+inversion_inicial = 54.73e6 # Inversión inicial en la planta
+tasa_impuestos = 0 # Tasa de impuestos sobre la renta
+tasa_descuento = 0.07 # Tasa de descuento para el cálculo del VAN
 
 # Llamada a la función calcular_flujo_de_caja
 df_flujo_caja = calcular_flujo_de_caja(años, precio_energia, produccion_anual, subsidios, costos_om, costos_combustible, costos_capital, costos_seguro, otros_costos, inversion_inicial, tasa_impuestos, tasa_descuento)
@@ -90,7 +91,7 @@ def graficar_van(df_flujo_caja):
     df_flujo_caja (pd.DataFrame): DataFrame con los datos de flujo de caja y VAN acumulado.
     """
     plt.figure(figsize=(10, 6))
-    plt.plot(df_flujo_caja['Año'], df_flujo_caja['VAN Acumulado'], marker='o')
+    plt.plot(df_flujo_caja['Año'], df_flujo_caja['VAN'], marker='o')
     plt.title('VAN Acumulado a lo largo de los años')
     plt.xlabel('Año')
     plt.ylabel('VAN Acumulado')
